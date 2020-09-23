@@ -28,12 +28,16 @@ public class HolaMundoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     public void doGet (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		response.setCharacterEncoding("UTF-8");
+    	String nombre = (String) request.getParameter("NombreUsuario");
+    	response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println("<HTML>");
 		out.println("<HEAD><TITLE>Hola Mundo!</TITLE></HEAD>");
 		out.println("<BODY>");
+		if ( nombre != null ){
+			 out.println("<br>Hola "+nombre+"<br>");
+		}
 		out.println("Bienvenido a mi primera página web!");
 		out.println("</BODY></HTML>");
 	}
