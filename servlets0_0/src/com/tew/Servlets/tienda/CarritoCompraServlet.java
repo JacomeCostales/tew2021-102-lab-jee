@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -72,33 +73,9 @@ public class CarritoCompraServlet extends HttpServlet {
 				"	</form>");
 		
 		
-		@SuppressWarnings("unchecked")
-		HashMap<String,Integer> carrito = (HashMap<String,Integer>)request.getSession().getAttribute("carrito");
-		if ( carrito == null ) {carrito = new HashMap<String, Integer>();}
+		RequestDispatcher dispatcher =getServletContext().getNamedDispatcher("CarritoLogica");
 		
-		
-		String producto = request.getParameter("producto");
-		if ( producto != null ){
-			Integer cantidad = (Integer) carrito.get(producto);
-			if ( cantidad == null )
-				cantidad = new Integer ( 1 );
-			else
-				cantidad = new Integer ( cantidad.intValue() + 1 );
-			
-			carrito.put(producto, cantidad);	
-		}
-		
-		request.getSession().setAttribute("carrito",carrito);
-		
-		out.println("<br>\r\n" + 
-				"			<H2>Carrito de la compra</h2>\r\n" + 
-				"		<br>\r\n" + 
-				"			<ul>\r\n" );
-				for(HashMap.Entry<String,Integer> entry : carrito.entrySet()) {
-					out.println("<li> PRODUCTO:"+entry.getKey() +": "+ entry.getValue()+ "unidades</li>");
-				}
-				
-				out.println("</ul> ");
+    	dispatcher.include(request, response);
 		
 		
 		
