@@ -9,6 +9,16 @@
     <servlet-name>HolaMundo</servlet-name>
     <url-pattern>/HolaMundoCordial</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>CarritoCompra</servlet-name>
+    <servlet-class>com.tew.Servlets.tienda.CarritoCompraServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CarritoCompraServlet</servlet-name>
+    <url-pattern>/CarritoCompraServlet</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

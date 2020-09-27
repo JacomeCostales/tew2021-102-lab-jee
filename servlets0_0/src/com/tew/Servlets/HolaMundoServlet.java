@@ -33,12 +33,6 @@ public class HolaMundoServlet extends HttpServlet {
     public void doGet (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
     	RequestDispatcher dispatcher =getServletContext().getNamedDispatcher("HolaMundoVista");
 		
-    	
-    	
-    	
-    	
-    	
-    	
     	dispatcher.forward(request, response);
 
 	}
