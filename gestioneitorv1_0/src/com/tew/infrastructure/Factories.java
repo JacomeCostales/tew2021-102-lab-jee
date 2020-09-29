@@ -90,4 +90,24 @@ public class Factories {
 			return "error";
 		}
 	}
+	
+	public String baja() {
+		AlumnosService service;
+		try {
+			
+			service = Factories.services.createAlumnosService();
+			//Eliminarlo de la lista 
+			int i =0;
+			for(Alumno a : alumnos) {
+				if(a.getId()==alumno.getId()) {alumnos[i]=null;}
+				i++;
+			}
+			//Elimniar alumno
+			service.deleteAlumno(alumno.getId());
+			return "exito";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
 }
