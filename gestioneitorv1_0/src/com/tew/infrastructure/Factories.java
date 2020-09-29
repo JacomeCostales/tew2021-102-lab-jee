@@ -4,7 +4,9 @@ import impl.tew.business.SimpleServicesFactory;
 import impl.tew.persistence.SimplePersistenceFactory;
 
 import com.tew.persistence.PersistenceFactory;
+import com.tew.business.AlumnosService;
 import com.tew.business.ServicesFactory;
+import com.tew.model.Alumno;
 
 /**
  * Esta clase es la que realemente relaciona las interfaces de las capas 
@@ -29,4 +31,63 @@ public class Factories {
 	public static ServicesFactory services = new SimpleServicesFactory();
 	public static PersistenceFactory persistence = new SimplePersistenceFactory();
 
+	private Alumno alumno = new Alumno();
+	private Alumno[] alumnos = null;
+	
+	public Factories(Alumno a, Alumno [] als) {
+		alumno = a;
+		alumnos =als;
+	}
+	
+	public String listado() {
+		AlumnosService service;
+		try {
+			// Acceso a la implementacion de la capa de negocio
+			// a trav�s de la factor�a
+			service = Factories.services.createAlumnosService();
+			// Asi le damos informaci�n a toArray para poder hacer el casting a Alumno[]
+			alumnos = (Alumno [])service.getAlumnos().toArray(new Alumno[0]);
+			return "exito";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
+	
+	public String edit() {
+		AlumnosService service;
+		try {
+			// Acceso a la implementacion de la capa de negocio
+			// a trav�s de la factor�a
+			service = Factories.services.createAlumnosService();
+			//Recargamos el alumno en la tabla de la base de datos por si hubiera cambios.
+			alumno = service.findById(alumno.getId());
+			return "exito";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
+	
+	public String salva() {
+		AlumnosService service;
+		try {
+			// Acceso a la implementacion de la capa de negocio
+			// a trav�s de la factor�a
+			service = Factories.services.createAlumnosService();
+			//Salvamos o actualizamos el alumno segun sea una operacion de alta o de edici�n
+			if (alumno.getId() == null) {
+			service.saveAlumno(alumno);
+			}
+			else {
+			service.updateAlumno(alumno);
+			}
+			//Actualizamos el javabean de alumnos inyectado en la tabla
+			alumnos = (Alumno [])service.getAlumnos().toArray(new Alumno[0]);
+			return "exito";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
 }
