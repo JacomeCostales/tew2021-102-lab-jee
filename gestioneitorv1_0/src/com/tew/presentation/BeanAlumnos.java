@@ -30,7 +30,9 @@ public class BeanAlumnos implements Serializable{
 	}	 
  
 	
-	 
+	 public String listado() {
+		 return factory.listado();
+	 }
 	
 	 
 	//Get y Set
