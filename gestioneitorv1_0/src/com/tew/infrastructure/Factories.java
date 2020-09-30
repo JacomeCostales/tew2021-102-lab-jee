@@ -94,7 +94,7 @@ public class Factories {
 	public String baja() {
 		AlumnosService service;
 		try {
-			
+			//fd
 			service = Factories.services.createAlumnosService();
 			//Eliminarlo de la lista 
 			int i =0;
