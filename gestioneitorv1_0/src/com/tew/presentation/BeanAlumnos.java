@@ -15,8 +15,8 @@ public class BeanAlumnos implements Serializable{
 	 // AltaForm.xhtml se puedan dejar los valores en un objeto existente.
 	private Alumno alumno = new Alumno();
 	private Alumno[] alumnos = null;
+	private Factories factory =null;
 	
-	Factories factory =null;
 	public BeanAlumnos(){
 		iniciaAlumno(null);
 		factory = new Factories(alumno,alumnos);
@@ -45,6 +45,12 @@ public class BeanAlumnos implements Serializable{
 	}
 	public void setAlumnos(Alumno[] alumnos) {
 		this.alumnos = alumnos;
+	}
+	public Factories getFactory() {
+		return factory;
+	}
+	public void setFactory(Factories factory) {
+		this.factory = factory;
 	}
 	 
 	 
