@@ -7,6 +7,7 @@ import com.tew.infrastructure.Factories;
 import com.tew.model.Alumno;
 
 
+
 public class BeanAlumnos implements Serializable{
 	private static final long serialVersionUID = 55555L;
 	 // Se añade este atributo de entidad para recibir el alumno concreto seleccionado
@@ -15,12 +16,13 @@ public class BeanAlumnos implements Serializable{
 	 // AltaForm.xhtml se puedan dejar los valores en un objeto existente.
 	private Alumno alumno = new Alumno();
 	private Alumno[] alumnos = null;
-	
+	private errores error;
 	
 	public BeanAlumnos(){
 		iniciaAlumno(null);
-		
+		error = new errores();
 		}
+	
 	public void iniciaAlumno(ActionEvent event) {
 		alumno.setId(null);
 		alumno.setIduser("IdUser");
@@ -35,12 +37,15 @@ public class BeanAlumnos implements Serializable{
 		try {
 			// Acceso a la implementacion de la capa de negocio
 			// a trav�s de la factor�a
-			service = Factories.services.createAlumnosService();
+			//service = Factories.services.createAlumnosService();
+			service = null;
 			// Asi le damos informaci�n a toArray para poder hacer el casting a Alumno[]
+			
 			alumnos = (Alumno [])service.getAlumnos().toArray(new Alumno[0]);
 			return "exito";
 		} catch (Exception e) {
-			e.printStackTrace();
+			
+			error = new errores("VISTA","listado()","BeanAlumnos",e.toString());
 			return "error";
 		}
 	}
@@ -55,7 +60,7 @@ public class BeanAlumnos implements Serializable{
 			alumno = service.findById(alumno.getId());
 			return "exito";
 		} catch (Exception e) {
-			e.printStackTrace();
+			error = new errores("VISTA","edit()","BeanAlumnos",e.toString());
 			return "error";
 		}
 	}
@@ -77,7 +82,7 @@ public class BeanAlumnos implements Serializable{
 			alumnos = (Alumno [])service.getAlumnos().toArray(new Alumno[0]);
 			return "exito";
 		} catch (Exception e) {
-			e.printStackTrace();
+			error = new errores("VISTA","salva()","BeanAlumnos",e.toString());
 			return "error";
 		}
 	}
@@ -93,7 +98,7 @@ public class BeanAlumnos implements Serializable{
 			alumnos = (Alumno [])service.getAlumnos().toArray(new Alumno[0]);
 			return "exito";
 		} catch (Exception e) {
-			e.printStackTrace();
+			error = new errores("VISTA","baja()","BeanAlumnos",e.toString());
 			return "error";
 		}
 	}
@@ -111,6 +116,14 @@ public class BeanAlumnos implements Serializable{
 	}
 	public void setAlumnos(Alumno[] alumnos) {
 		this.alumnos = alumnos;
+	}
+
+	public errores getError() {
+		return error;
+	}
+
+	public void setError(errores error) {
+		this.error = error;
 	}
 	
 	 
