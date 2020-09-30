@@ -9,17 +9,16 @@ import com.tew.model.Alumno;
 
 public class BeanAlumnos implements Serializable{
 	private static final long serialVersionUID = 55555L;
-	 // Se añade este atributo de entidad para recibir el alumno concreto seleccionado
+	 // Se aÃ±ade este atributo de entidad para recibir el alumno concreto seleccionado
 	 // de la tabla o de un formulario.
 	 // Es necesario inicializarlo para que al entrar desde el formulario de
 	 // AltaForm.xhtml se puedan dejar los valores en un objeto existente.
 	private Alumno alumno = new Alumno();
 	private Alumno[] alumnos = null;
-	private Factories factory =null;
+	
 	
 	public BeanAlumnos(){
 		iniciaAlumno(null);
-		factory = new Factories(alumno,alumnos);
 		
 		}
 	public void iniciaAlumno(ActionEvent event) {
@@ -31,10 +30,73 @@ public class BeanAlumnos implements Serializable{
 	}	 
  
 	
-	 public String listado() {return factory.listado();}	
-	 public String baja(){return factory.baja();}
-	 public String editar() {return factory.edit();}
-	 public String salva() {return factory.salva();}
+	public String listado() {
+		AlumnosService service;
+		try {
+			// Acceso a la implementacion de la capa de negocio
+			// a travï¿½s de la factorï¿½a
+			service = Factories.services.createAlumnosService();
+			// Asi le damos informaciï¿½n a toArray para poder hacer el casting a Alumno[]
+			alumnos = (Alumno [])service.getAlumnos().toArray(new Alumno[0]);
+			return "exito";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
+	
+	public String edit() {
+		AlumnosService service;
+		try {
+			// Acceso a la implementacion de la capa de negocio
+			// a travï¿½s de la factorï¿½a
+			service = Factories.services.createAlumnosService();
+			//Recargamos el alumno en la tabla de la base de datos por si hubiera cambios.
+			alumno = service.findById(alumno.getId());
+			return "exito";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
+	
+	public String salva() {
+		AlumnosService service;
+		try {
+			// Acceso a la implementacion de la capa de negocio
+			// a travï¿½s de la factorï¿½a
+			service = Factories.services.createAlumnosService();
+			//Salvamos o actualizamos el alumno segun sea una operacion de alta o de ediciï¿½n
+			if (alumno.getId() == null) {
+			service.saveAlumno(alumno);
+			}
+			else {
+			service.updateAlumno(alumno);
+			}
+			//Actualizamos el javabean de alumnos inyectado en la tabla
+			alumnos = (Alumno [])service.getAlumnos().toArray(new Alumno[0]);
+			return "exito";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
+	
+	public String baja() {
+		AlumnosService service;
+		try {
+			//
+			service = Factories.services.createAlumnosService();
+			
+			service.deleteAlumno(alumno.getId());
+			service.getAlumnos().remove(alumno);
+			alumnos = (Alumno [])service.getAlumnos().toArray(new Alumno[0]);
+			return "exito";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
 	
 	 
 	 //Get y Set
@@ -50,12 +112,6 @@ public class BeanAlumnos implements Serializable{
 	public void setAlumnos(Alumno[] alumnos) {
 		this.alumnos = alumnos;
 	}
-	public Factories getFactory() {
-		return factory;
-	}
-	public void setFactory(Factories factory) {
-		this.factory = factory;
-	}
-	 
+	
 	 
 }

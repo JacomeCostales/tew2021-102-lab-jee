@@ -4,12 +4,23 @@
       xmlns:h="http://java.sun.com/jsf/html"
        xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-<title>Formulario de edición</title> 
+<title>Cabecera</title> 
 </h:head>
 <h:body>
 
-<h1>FORMULARIO DE EDICIÓN</h1>
+<h:form>
+	<h:panelGrid columns="2">
+		NOMBRE: <h:inputText value="#{controller.alumno.nombre}"/>
+		APELLIDOS: <h:inputText value="#{controller.alumno.apellidos}"/>
+		USERID: <h:inputText value="#{controller.alumno.iduser}"/>
+		EMAIL: <h:inputText value="#{controller.alumno.email}"/>
+	</h:panelGrid>
+	<h:commandLink value="editar" action="#{controller.edit}"/>
+</h:form>
 
-<h:commandLink value="editar" action="#{controller.editar}"/>
 </h:body>
 </html>
+
+
+
+
