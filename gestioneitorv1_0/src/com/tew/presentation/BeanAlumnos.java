@@ -20,6 +20,7 @@ public class BeanAlumnos implements Serializable{
 	public BeanAlumnos(){
 		iniciaAlumno(null);
 		factory = new Factories(alumno,alumnos);
+		
 		}
 	public void iniciaAlumno(ActionEvent event) {
 		alumno.setId(null);
@@ -30,12 +31,13 @@ public class BeanAlumnos implements Serializable{
 	}	 
  
 	
-	 public String listado() {
-		 return factory.listado();
-	 }
+	 public String listado() {return factory.listado();}	
+	 public String baja(){return factory.baja();}
+	 public String editar() {return factory.edit();}
+	 public String salva() {return factory.salva();}
 	
 	 
-	//Get y Set
+	 //Get y Set
 	public Alumno getAlumno() {
 		return alumno;
 	}
