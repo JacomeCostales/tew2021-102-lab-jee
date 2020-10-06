@@ -18,10 +18,10 @@ public class BeanSettings implements Serializable{
 	 private Locale locale = new Locale("es");
 	 
 	 @ManagedProperty(value="#{alumno}")
-	  private BeanAlumno alumno;
+	 private BeanAlumno alumno;
 	 
 	 public void setAlumno(BeanAlumno alumno) {this.alumno =alumno;	}
-	public BeanAlumno getAlumno(){ return this.alumno;	}
+	 public BeanAlumno getAlumno(){ return this.alumno;	}
 	 
 	 public Locale getLocale() { /*Habria que cambiar algo de código para coger locale
 	del navegador la primera vez que se accede a getLocale(), de momento el idioma de
