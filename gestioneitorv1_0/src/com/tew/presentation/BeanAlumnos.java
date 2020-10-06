@@ -18,6 +18,8 @@ public class BeanAlumnos implements Serializable{
 	private Alumno[] alumnos = null;
 	private errores error;
 	
+	
+	
 	public BeanAlumnos(){
 		iniciaAlumno(null);
 		error = new errores();
@@ -37,8 +39,7 @@ public class BeanAlumnos implements Serializable{
 		try {
 			// Acceso a la implementacion de la capa de negocio
 			// a trav�s de la factor�a
-			//service = Factories.services.createAlumnosService();
-			service = null;
+			service = Factories.services.createAlumnosService();
 			// Asi le damos informaci�n a toArray para poder hacer el casting a Alumno[]
 			
 			alumnos = (Alumno [])service.getAlumnos().toArray(new Alumno[0]);
