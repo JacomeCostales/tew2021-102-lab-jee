@@ -23,6 +23,9 @@ public class BeanAlumnos implements Serializable{
 
 	@ManagedProperty(value="#{alumno}")
 	private BeanAlumno alumno;
+	
+	@ManagedProperty(value="#{error}")
+	private BeanError error;
 
 	public void setAlumno(BeanAlumno alumno) {
 		this.alumno = alumno;
@@ -31,6 +34,12 @@ public class BeanAlumnos implements Serializable{
 		return this.alumno;
 	}
 
+	public BeanError getError() {
+		return error;
+	}
+	public void setError(BeanError error) {
+		this.error = error;
+	}
 	public Alumno[] getAlumnos() {
 		return alumnos;
 	}
@@ -74,12 +83,14 @@ public class BeanAlumnos implements Serializable{
 		try {
 			// Acceso a la implementacion de la capa de negocio 
 			// a través de la factoría
-			service = Factories.services.createAlumnosService();
+			//service = Factories.services.createAlumnosService();
+			service = null;
 			// Asi le damos información a toArray para poder hacer el casting a Alumno[]
 			alumnos = (Alumno [])service.getAlumnos().toArray(new Alumno[0]);
 			return "exito";
 		} catch (Exception e) {
-			e.printStackTrace();  
+			
+			setError(new BeanError(FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo(),"listado","BeanAlumno",e.toString()));
 			return "error";
 		}
 	}
@@ -93,7 +104,7 @@ public class BeanAlumnos implements Serializable{
 			alumno = (BeanAlumno) service.findById(alumno.getId());
 			return "exito";
 		} catch (Exception e) {
-			e.printStackTrace();  
+			setError(new BeanError(FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo(),"edit","BeanAlumno",e.toString()));
 			return "error";
 		}
 	}
@@ -114,7 +125,7 @@ public class BeanAlumnos implements Serializable{
 			alumnos = (Alumno [])service.getAlumnos().toArray(new Alumno[0]);
 			return "exito";
 		} catch (Exception e) {
-			e.printStackTrace();
+			setError(new BeanError(FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo(),"salva","BeanAlumno",e.toString()));
 			return "error";
 		}
 	}
@@ -132,7 +143,7 @@ public class BeanAlumnos implements Serializable{
 			alumnos = (Alumno [])service.getAlumnos().toArray(new Alumno[0]);
 			return "exito";
 		} catch (Exception e) {
-			e.printStackTrace();
+			setError(new BeanError(FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo(),"baja","BeanAlumno",e.toString()));
 			return "error";
 		}
 	}

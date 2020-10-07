@@ -13,45 +13,50 @@ import com.tew.model.Alumno;
 @ManagedBean
 @SessionScoped
 public class BeanSettings implements Serializable{
-	 private static final long serialVersionUID = 2L;
-	 private static final Locale ENGLISH = new Locale("en");
-	 private static final Locale SPANISH = new Locale("es");
-	 private Locale locale = new Locale("es");
-	 
-	 @ManagedProperty(value="#{alumno}")
-	 private BeanAlumno alumno;
-	 
-	 public void setAlumno(BeanAlumno alumno) {this.alumno =alumno;	}
-	 public BeanAlumno getAlumno(){ return this.alumno;	}
-	 
-	 public Locale getLocale() { /*Habria que cambiar algo de código para coger locale
+	private static final long serialVersionUID = 2L;
+	private static final Locale ENGLISH = new Locale("en");
+	private static final Locale SPANISH = new Locale("es");
+	private Locale locale = new Locale("es");
+
+	@ManagedProperty(value="#{alumno}")
+	private BeanAlumno alumno;
+	@ManagedProperty(value="#{error}")
+	private BeanError error;
+
+	public void setAlumno(BeanAlumno alumno) {this.alumno =alumno;	}
+	public BeanAlumno getAlumno(){ return this.alumno;	}
+
+	public BeanError getError() {return error;}
+	public void setError(BeanError error) {this.error = error;}
+
+	public Locale getLocale() { /*Habria que cambiar algo de código para coger locale
 	del navegador la primera vez que se accede a getLocale(), de momento el idioma de
 	partida “es”*/
-	 return(locale);
-	 }
-	 public void setSpanish(ActionEvent event) {
-	 locale = SPANISH;
-	 try {
-		 FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
-		 if (alumno != null)
-		 if (alumno.getId()== null) //valores por defecto del alumno, si no NO inicializar
-		 alumno.iniciaAlumno(null);
-		 } catch (Exception ex){
-		 ex.printStackTrace();
-		 }
-	 }
-	 public void setEnglish(ActionEvent event) {
-	 locale = ENGLISH;
-	 try {
-		 FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
-		 if (alumno != null)
-		 if (alumno.getId()== null) //valores por defecto del alumno, si no NO inicializar
-		 alumno.iniciaAlumno(null);
-		 } catch (Exception ex){
-		 ex.printStackTrace();
-		 }
+		return(locale);
 	}
-	 
+	public void setSpanish(ActionEvent event) {
+		locale = SPANISH;
+		try {
+			FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
+			if (alumno != null)
+				if (alumno.getId()== null) //valores por defecto del alumno, si no NO inicializar
+					alumno.iniciaAlumno(null);
+		} catch (Exception ex){
+			setError(new BeanError(FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo(),"setSpanish","BeanSettings",ex.toString()));
+		}
+	}
+	public void setEnglish(ActionEvent event) {
+		locale = ENGLISH;
+		try {
+			FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
+			if (alumno != null)
+				if (alumno.getId()== null) //valores por defecto del alumno, si no NO inicializar
+					alumno.iniciaAlumno(null);
+		} catch (Exception ex){
+			setError(new BeanError(FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo(),"setSpanish","BeanSettings",ex.toString()));
+		}
+	}
+
 	//Se inicia correctamente el Managed Bean inyectado si JSF lo hubiera creado
 	//y en caso contrario se crea.
 	//(hay que tener en cuenta que es un Bean de sesión)
@@ -64,10 +69,10 @@ public class BeanSettings implements Serializable{
 	//Es sólo a modo de traza.
 	@PreDestroy
 	public void end(){
-		 System.out.println("BeanSettings - PreDestroy");
+		System.out.println("BeanSettings - PreDestroy");
 	}
-	
-	
-	 
-	 
+
+
+
+
 }
