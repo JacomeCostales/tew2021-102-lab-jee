@@ -37,9 +37,7 @@ public class BeanAlumnos implements Serializable{
 	public BeanError getError() {
 		return error;
 	}
-	public void setError(BeanError error) {
-		this.error = error;
-	}
+	
 	public Alumno[] getAlumnos() {
 		return alumnos;
 	}
@@ -56,6 +54,7 @@ public class BeanAlumnos implements Serializable{
 	@PostConstruct
 	public void init() {
 		alumno = Factories.beanAlumno.instanciaAlumno();
+		error = Factories.beanError.instanciaError();
 	}
 	@PreDestroy
 	public void end() {
@@ -89,8 +88,11 @@ public class BeanAlumnos implements Serializable{
 			alumnos = (Alumno [])service.getAlumnos().toArray(new Alumno[0]);
 			return "exito";
 		} catch (Exception e) {
+			this.error.setVista(FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo());
+			this.error.setMetodo("listado");
+			this.error.setClase("BeanAlumno");
+			this.error.setError(e.toString());
 			
-			setError(new BeanError(FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo(),"listado","BeanAlumno",e.toString()));
 			return "error";
 		}
 	}
@@ -104,7 +106,11 @@ public class BeanAlumnos implements Serializable{
 			alumno = (BeanAlumno) service.findById(alumno.getId());
 			return "exito";
 		} catch (Exception e) {
-			setError(new BeanError(FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo(),"edit","BeanAlumno",e.toString()));
+			this.error.setVista(FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo());
+			this.error.setMetodo("edit");
+			this.error.setClase("BeanAlumno");
+			this.error.setError(e.toString());
+			
 			return "error";
 		}
 	}
@@ -125,7 +131,10 @@ public class BeanAlumnos implements Serializable{
 			alumnos = (Alumno [])service.getAlumnos().toArray(new Alumno[0]);
 			return "exito";
 		} catch (Exception e) {
-			setError(new BeanError(FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo(),"salva","BeanAlumno",e.toString()));
+			this.error.setVista(FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo());
+			this.error.setMetodo("salva");
+			this.error.setClase("BeanAlumno");
+			this.error.setError(e.toString());
 			return "error";
 		}
 	}
@@ -143,7 +152,10 @@ public class BeanAlumnos implements Serializable{
 			alumnos = (Alumno [])service.getAlumnos().toArray(new Alumno[0]);
 			return "exito";
 		} catch (Exception e) {
-			setError(new BeanError(FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo(),"baja","BeanAlumno",e.toString()));
+			this.error.setVista(FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo());
+			this.error.setMetodo("baja");
+			this.error.setClase("BeanAlumno");
+			this.error.setError(e.toString());
 			return "error";
 		}
 	}
