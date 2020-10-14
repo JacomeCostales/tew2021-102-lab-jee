@@ -82,8 +82,8 @@ public class BeanAlumnos implements Serializable{
 		try {
 			// Acceso a la implementacion de la capa de negocio 
 			// a través de la factoría
-			//service = Factories.services.createAlumnosService();
-			service = null;
+			service = Factories.services.createAlumnosService();
+			//service = null;
 			// Asi le damos información a toArray para poder hacer el casting a Alumno[]
 			alumnos = (Alumno [])service.getAlumnos().toArray(new Alumno[0]);
 			return "exito";
