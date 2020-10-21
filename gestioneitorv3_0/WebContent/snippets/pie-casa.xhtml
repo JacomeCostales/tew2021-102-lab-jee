@@ -6,5 +6,8 @@
   <h:form id="form-pie">
        <p:commandLink value="#{msgs.enlaceCasa}" action="casa">
        </p:commandLink>
+       
+       <p:growl id="growl" showDetail="true" sticky="true" />  
+	 <p:commandButton style="float:right" value="Emular error" action="#{growlError.saveMessage}" update="@form" />
   </h:form>
 </ui:composition>

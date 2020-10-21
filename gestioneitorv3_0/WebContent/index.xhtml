@@ -14,11 +14,16 @@
 	<ui:define name="cuerpo">
 		<center>
 			<p:growl id="mensajes" showDetail="false" />
+			
 			<h:form id="form-principal">
+				
 				<ui:include src="/snippets/form-login.xhtml" />
 				<p:commandButton value="#{msgs.login_form_button_send}"
 					action="#{login.verify}" update=":mensajes">
 				</p:commandButton>
+				
+				
+				 
 			</h:form>
 		</center>
 	</ui:define>

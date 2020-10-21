@@ -3,6 +3,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
+	
 	<h:panelGrid id="Grid" columns="2" cellpadding="5">
   #{msgs.nombre} 
   <h:panelGroup>
@@ -51,4 +52,5 @@
 			action="#{controller.salva}" update="Grid" process="@form" >
 		</p:commandButton>
 	</h:panelGrid>
+	
 </ui:composition>
