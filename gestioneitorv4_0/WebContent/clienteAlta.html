@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<head>
+			<title>Cliente Alta</title>
+			<script type="text/javascript" src="/gestioneitorv4_0/rest-jsapi"></script>
+		</head>
+		
+		<form action=””>
+			Nombre: <input type="text" id="nombre" size=10/> <br/>
+			Apellidos: <input type="text" id="apellidos" size=10/> <br/>
+			ID: <input type="text" id="id" size=10/> <br/>
+			Email: <input type="text" id="email" size=10/> <br/>
+			Botón submit: <input type="submit" id="boton">
+		</form>
+		
+		<script>
+			document.getElementById("boton").addEventListener("click", function(event){
+				event.preventDefault(); 
+				
+				var vNombre = document.getElementById("nombre");
+				var vApellidos = document.getElementById("apellidos");
+				var vId = document.getElementById("id");
+				var vEmail = document.getElementById("email");
+				
+				
+				document.getElementById("prueba").innerHTML += "Se ha enviado correctamente el Alumno: "+vId.value+" - "+vNombre.value+"<br/>";
+				
+				AlumnosServicesRs.saveAlumno({$entity: {"nombre":vNombre.value, "apellidos":vApellidos.value, "iduser":vId.value, "email":vEmail.value}, $contentType: "application/json"});
+				
+			});
+		</script>
+		<p id="prueba"></p>
+	</body>
+</html>
