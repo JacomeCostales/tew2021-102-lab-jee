@@ -8,35 +8,45 @@
 <f:view locale="#{settings.locale}">
  <h:head>
  <title>#{msgs.tituloHead}</title>
+ 
+ <style>
+	body {
+	  background-color: DimGrey;
+	  font-family: Arial;
+	  font-weight: bold;
+	}
+	
+</style>
+
  </h:head>
  <h:body>
- <h:form id="form-cabecera">
- <center>
- <h1>#{msgs.tituloAplicacion1}</h1>
- <br /> <br />
- <h2>#{msgs.tituloAplicacion2}</h2>
- </center>
- <br />
- <br />
- <table border="5" align="center">
- <tr>
- <th class="title"><ui:insert
-name="titulo">#{msgs.tituloDefectoCabecera}</ui:insert>
- </th>
- </tr>
- </table>
- <p:menubar>
- <p:submenu style="float:right" label="#{msgs.textoIdioma}"
- icon="ui-icon-document">
- <p:menuitem value="#{msgs.enlaceIdiomaES}"
- actionListener="#{settings.setSpanish}" update="@all" />
- <p:menuitem value="#{msgs.enlaceIdiomaEN}"
- actionListener="#{settings.setEnglish}" update="@all" />
- </p:submenu>
- </p:menubar>
- </h:form>
- <ui:insert name="cuerpo">#{msgs.tituloDefectoCuerpo}</ui:insert>
- <ui:insert name="pie">#{msgs.tituloPie}</ui:insert>
+	 <h:form id="form-cabecera">
+		 
+		 <h1 style="margin">#{msgs.tituloAplicacion1}<i class="fa fa-fw fa-users" style="font-size: 2em; color: white;"></i></h1>
+		 
+		 <h2>#{msgs.tituloAplicacion2}</h2>
+		
+		 
+		 
+		 <table border="1" align="center">
+		 <tr>
+		 <th class="title"><ui:insert
+		name="titulo">#{msgs.tituloDefectoCabecera}</ui:insert>
+		 </th>
+		 </tr>
+		 </table>
+		 <p:menubar>
+		 <p:submenu style="float:right" label="#{msgs.textoIdioma}"
+		 icon="ui-icon-document">
+		 <p:menuitem value="#{msgs.enlaceIdiomaES}"
+		 actionListener="#{settings.setSpanish}" update="@all" />
+		 <p:menuitem value="#{msgs.enlaceIdiomaEN}"
+		 actionListener="#{settings.setEnglish}" update="@all" />
+		 </p:submenu>
+		 </p:menubar>
+	 </h:form>
+	 <ui:insert name="cuerpo">#{msgs.tituloDefectoCuerpo}</ui:insert>
+	 <ui:insert name="pie">#{msgs.tituloPie}</ui:insert>
  </h:body>
 </f:view>
 </html>

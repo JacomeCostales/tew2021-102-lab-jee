@@ -2,6 +2,7 @@
     <wb-module deploy-name="gestioneitorv3_0">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/img"/>
         <property name="context-root" value="gestioneitorv3_0"/>
         <property name="java-output-path" value="/gestioneitorv3_0/build/classes"/>
     </wb-module>

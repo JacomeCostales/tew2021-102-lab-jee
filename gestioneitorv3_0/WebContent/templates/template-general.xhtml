@@ -4,29 +4,42 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	>
 	
 <f:view locale="#{settings.locale}">
 	<h:head>
 		<title>#{msgs.tituloHead}</title>
+		<style>
+			body {
+			  background-color: DimGrey;
+			  font-family: Arial;
+			  font-weight: bold;
+			}
+			
+			</style>
+		
+		
+		
 	</h:head>
 	<h:body>
 		<h:form id="form-cabecera">
-			<center>
-				<h1>#{msgs.tituloAplicacion1}</h1>
-				<br /> <br />
+						
+				<h1 style="margin-left:5%;"><i class="fa fa-fw fa-users" style="font-size: 2em; color: white;"></i>#{msgs.tituloAplicacion1}</h1>
+				<br />
 				<h2>#{msgs.tituloAplicacion2}</h2>
-			</center>
+			
 			<br />
-			<br />
+			
 			<table border="5" align="center">
 				<tr>
-					<th class="title"><ui:insert name="titulo">#{msgs.tituloDefectoCabecera}</ui:insert>
+					<th class="title" ><ui:insert name="titulo">#{msgs.tituloDefectoCabecera}</ui:insert>
 					</th>
 				</tr>
 			</table>
+			<br />
 			<p:menubar>
-				<p:submenu label="#{msgs.tituloOpciones}" icon="ui-icon-document">
+				<p:submenu label="#{msgs.tituloOpciones}" icon="fa fa-fw fa-edit">
 					<p:menuitem value="#{msgs.enlaceListado}"
 						action="#{controller.listado}" />
 					<p:separator />
