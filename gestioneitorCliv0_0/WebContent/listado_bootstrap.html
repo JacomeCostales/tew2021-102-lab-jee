@@ -13,9 +13,20 @@
       // del servicio
      div = document.getElementById("contenido")
      div.innerHTML = "";
+    
+     
      for (i in alumnos) {
-       div.innerHTML += alumnos[i]["nombre"] + alumnos[i]["apellidos"] + alumnos[i]["email"] + alumnos[i]["iduser"]+"</br>";
+       
+       div.innerHTML += "<div class='row'>";
+       div.innerHTML += "<div class='col-sm-3'>"+alumnos[i]["nombre"] +"</div>";
+       div.innerHTML += "<div class='col-sm-3'>"+ alumnos[i]["apellidos"] + "</div>";
+       div.innerHTML += "<div class='col-sm-3'>"+ alumnos[i]["email"] +"</div>";
+       div.innerHTML += "<div class='col-sm-3'>"+ alumnos[i]["iduser"]+"</div>";
+       div.innerHTML += "</div>";
+      
+       
       }
+     
     }
   </script>
   
@@ -26,11 +37,23 @@
   
 </head>
 
-<body onload="solicitarDatosAlumnos()" style="background-color:LightGrey">
+<body onload="solicitarDatosAlumnos()" tyle="background-color:LightGrey">
 <div class="container">
 	 <h1>Listado de alumnos</h1>
 	 <br/>
-	 <div id="contenido" style="height:90%;top:30px">
+	 
+	 
+	 
+     <div class="row">
+	     <div class="col-sm-3" style="font-weight:bold;">NOMBRE</div>
+	     <div  ></div>
+	     <div class="col-sm-3" style="font-weight:bold;">APELLIDOS</div>
+	     <div class="col-sm-3" style="font-weight:bold;">EMAIL</div>
+	     <div class="col-sm-3" style="font-weight:bold;">ID</div>
+     </div>
+	 
+	 <div id="contenido">
+	 
 	 </div>
 </div>
 </body>
