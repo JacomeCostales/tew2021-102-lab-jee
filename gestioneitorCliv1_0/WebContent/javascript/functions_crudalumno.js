@@ -86,6 +86,11 @@ function View(){
 		 
 	 } // PENDIENTE DE IMPLEMENTAR
 	 
-	 this.getIdAlumno = function(celda) {} // PENDIENTE DE IMPLEMENTAR
+	 this.getIdAlumno = function(celda) {
+		 var id_alumno = parseInt(celda.closest('tr').find('td').get(1).innerHTML);
+		 return id_alumno; 
+
+		 
+	 } // PENDIENTE DE IMPLEMENTAR
 };
 
