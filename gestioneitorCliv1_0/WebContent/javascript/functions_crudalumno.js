@@ -152,6 +152,14 @@ function Controller(varmodel, varview) {
 			  that.view.loadAlumnoInForm(alumno);
 		 });
 		 
+		
+		 $("#tblList").on("click", ".btnDelete",
+			 function(event) {
+			  var id_alumno = that.view.getIdAlumno($(this));
+			  that.model.remove(id_alumno);
+			  that.view.list(that.model.tbAlumnos);
+		 });
+		 
 		 
 		 
 	 }
